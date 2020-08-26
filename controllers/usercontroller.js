@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs');
 router.post('/user', function(req, res) {
 
     User.create({
-        username: req.body.user.username,
+        email: req.body.user.email,
         passwordhash: bcrypt.hashSync(req.body.user.passwordhash, 13)
     })
     .then(
@@ -26,7 +26,7 @@ router.post('/user', function(req, res) {
 router.post('/login', function(req, res) {
     User.findOne({
         where: {
-            username:req.body.user.username   
+            email:req.body.user.email   
         }
     })
     .then(function loginSuccess(user) {

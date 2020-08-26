@@ -10,9 +10,11 @@ router.get('/practice', validateSession, function(req, res){
 
 router.post('/', validateSession, (req, res) => {
     const foodEntry = {
+        name: req.body.food.name,
+        image: req.body.food.image,
+        ingredients: req.body.food.ingredients,
         description: req.body.food.description,
-        definition: req.body.food.definition,
-        result: req.body.food.result,
+        recipe: req.body.food.recipe,
         owner: req.user.id
     }
     Food.create(foodEntry)
@@ -26,15 +28,6 @@ router.get("/", (req, res) => {
     .catch(err => res.status(500).json({ error: err }))
 });
 
-router.get("/mine", validateSession, (req,res) => {
-    let userid = req.user.id
-    Food.findAll({
-        where: { owner: userid }
-    })
-    .then(food => res.status(200).json(food))
-    .catch(err => res.status(500).json({ error: err }))
-})
-
 router.get('/:id', function (req, res) {
     let description = req.params.id;
 
@@ -47,9 +40,11 @@ router.get('/:id', function (req, res) {
 
 router.put("/:id", validateSession, function(req, res) {
     const updateFoodEntry = {
+        name: req.body.food.name,
+        image: req.body.food.image,
+        ingredients: req.body.food.ingredients,
         description: req.body.food.description,
-        definition: req.body.food.defenition,
-        result: req.body.food.result
+        recipe: req.body.food.recipe
     };
 
     const query = { where: { id: req.params.id, owner: req.user.id } };
