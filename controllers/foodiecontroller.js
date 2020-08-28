@@ -11,7 +11,7 @@ router.get('/practice', validateSession, function(req, res){
 router.post('/', validateSession, (req, res) => {
     const foodEntry = {
         name: req.body.food.name,
-        image: req.body.food.image,
+        url: req.body.food.url,
         ingredients: req.body.food.ingredients,
         description: req.body.food.description,
         recipe: req.body.food.recipe,
@@ -41,7 +41,7 @@ router.get('/:id', function (req, res) {
 router.put("/:id", validateSession, function(req, res) {
     const updateFoodEntry = {
         name: req.body.food.name,
-        image: req.body.food.image,
+        url: req.body.food.url,
         ingredients: req.body.food.ingredients,
         description: req.body.food.description,
         recipe: req.body.food.recipe
